@@ -20,6 +20,8 @@ import io.netty.util.concurrent.GenericFutureListener;
  */
 public class NettyServer {
 
+    private static final int PORT = 8001;
+
     public static void main(String[] args) {
 
         //服务端引导类
@@ -54,21 +56,19 @@ public class NettyServer {
         bind(serverBootstrap, 8000);
     }
 
-    private static void bind(final ServerBootstrap serverBootstrap, final int port){
+    private static void bind(final ServerBootstrap serverBootstrap, final int port) {
 
         //监听某个端口，返回值是一个ChannelFuture，是一个异步方法
         serverBootstrap
                 .bind(port)
                 // 用来返回端口是否绑定成功
-                .addListener(new GenericFutureListener<Future<? super Void>>() {
-                    public void operationComplete(Future<? super Void> future) throws Exception {
-                        if(future.isSuccess()){
-                            System.out.println(port + " : 端口绑定成功!");
-                        }else{
-                            //如果绑定失败，继续找下一个可以绑定的端口
-                            System.out.println(port + " : 端口绑定失败!");
-                            bind(serverBootstrap, port+1);
-                        }
+                .addListener(future -> {
+                    if (future.isSuccess()) {
+                        System.out.println(port + " : 端口绑定成功!");
+                    } else {
+                        //如果绑定失败，继续找下一个可以绑定的端口
+                        System.out.println(port + " : 端口绑定失败!");
+                        bind(serverBootstrap, port + 1);
                     }
                 });
     }
