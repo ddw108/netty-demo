@@ -6,8 +6,6 @@ import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.handler.codec.string.StringDecoder;
-import io.netty.util.concurrent.Future;
-import io.netty.util.concurrent.GenericFutureListener;
 
 /**
  * 创建一个引导类，
@@ -20,7 +18,7 @@ import io.netty.util.concurrent.GenericFutureListener;
  */
 public class NettyServer {
 
-    private static final int PORT = 8001;
+    private static final int PORT = 8000;
 
     public static void main(String[] args) {
 
@@ -37,23 +35,23 @@ public class NettyServer {
                 .group(boss, worker)
                 //指定IO模型，这里为NIO模型
                 .channel(NioServerSocketChannel.class)
+                //设置TCP底层数据
+                //连接超时时间
+                .option(ChannelOption.SO_BACKLOG, 1024)
+                //底层心跳机制
+                .childOption(ChannelOption.SO_KEEPALIVE, true)
+                //实时性相关
+                .childOption(ChannelOption.TCP_NODELAY, true)
                 //childHandler()用于指定处理新连接数据的读写处理逻辑
                 //handler()用于指定在服务端启动过程中的一些逻辑
                 .childHandler(new ChannelInitializer<NioSocketChannel>() {
-                    //跟NIO有关的服务启动初始化方法的实现
                     @Override
                     protected void initChannel(NioSocketChannel ch) {
-                        ch.pipeline().addLast(new StringDecoder());
-                        ch.pipeline().addLast(new SimpleChannelInboundHandler<String>() {
-                            //重写读动作
-                            @Override
-                            protected void channelRead0(ChannelHandlerContext ctx, String msg) {
-                                System.out.println(msg);
-                            }
-                        });
+                        //指定连接数据读写逻辑
+                        ch.pipeline().addLast(new ServerHandler());
                     }
                 });
-        bind(serverBootstrap, 8000);
+        bind(serverBootstrap, PORT);
     }
 
     private static void bind(final ServerBootstrap serverBootstrap, final int port) {
