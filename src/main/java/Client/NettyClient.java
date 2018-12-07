@@ -3,7 +3,9 @@ package Client;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelInitializer;
+import io.netty.channel.ChannelOption;
 import io.netty.channel.nio.NioEventLoopGroup;
+import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.handler.codec.string.StringEncoder;
 
@@ -34,25 +36,31 @@ public class NettyClient {
                 .group(group)
                 //指定 IO 类型为 NIO
                 .channel(NioSocketChannel.class)
-                //IO 处理逻辑
-                .handler(new ChannelInitializer<Channel>() {
+                //设置TCP底层数据
+                //连接超时时间
+                .option(ChannelOption.CONNECT_TIMEOUT_MILLIS, 5000)
+                //底层心跳机制
+                .option(ChannelOption.SO_KEEPALIVE, true)
+                //实时性相关
+                .option(ChannelOption.TCP_NODELAY, true)
+                //childHandler()用于指定处理新连接数据的读写处理逻辑
+                //handler()用于指定在服务端启动过程中的一些逻辑
+                .handler(new ChannelInitializer<SocketChannel>() {
                     @Override
-                    protected void initChannel(Channel ch) {
-                        ch.pipeline().addLast(new StringEncoder());
+                    public void initChannel(SocketChannel ch) {
+                        //指定连接数据读写逻辑
+                        //pipeline体现责任链模式
+                        //addLast添加逻辑处理器
+                        ch.pipeline().addLast(new ClientHandler());
                     }
                 });
 
         //建立连接
-        Channel channel = connect(bootstrap, "127.0.0.1", 8001, 10);
-
-        while (true) {
-            channel.writeAndFlush(new Date() + ": hello world!");
-            Thread.sleep(2000);
-        }
+        connect(bootstrap, "127.0.0.1", 8001, 10);
     }
 
-    private static Channel connect(Bootstrap bootstrap, String host, int port, int retry) {
-        Channel channel = bootstrap.connect(host, port).addListener(future -> {
+    private static void connect(Bootstrap bootstrap, String host, int port, int retry) {
+        bootstrap.connect(host, port).addListener(future -> {
             if (future.isSuccess()) {
                 System.out.println("连接成功!");
             } else if (retry == 0) {
@@ -66,7 +74,6 @@ public class NettyClient {
                 bootstrap.config().group().schedule(() -> connect(bootstrap, host, port, retry - 1), delay, TimeUnit
                         .SECONDS);
             }
-        }).channel();
-        return channel;
+        });
     }
 }
