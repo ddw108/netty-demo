@@ -1,4 +1,4 @@
-package Service;
+package sccommunication.service;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
