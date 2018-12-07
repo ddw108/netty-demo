@@ -21,7 +21,7 @@ import java.util.concurrent.TimeUnit;
  */
 public class NettyClient {
 
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) {
 
         //客户端引导类
         Bootstrap bootstrap = new Bootstrap();
