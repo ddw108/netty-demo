@@ -4,7 +4,10 @@ import io.netty.buffer.ByteBuf;
 import io.netty.buffer.ByteBufAllocator;
 
 /**
- * 类注释，描述
+ * 本质上ByteBuf的原理就是，
+ * 它引用了一段内存，这段内存可以是堆内也可以是堆外的，
+ * 然后用引用计数来控制这段内存是否需要被释放，使用读写指针来控制对 ByteBuf 的读写，
+ * 可以理解为是外观模式的一种使用
  *
  * @author dengdingwwen
  * @version $Id: ByteBufTset.java,v 1.0 2018/12/7 15:05 dengdingwwen
