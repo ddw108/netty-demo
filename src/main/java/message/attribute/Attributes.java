@@ -10,5 +10,6 @@ import io.netty.util.AttributeKey;
  * @date 2018/12/10 15:50
  */
 public interface Attributes {
+    //channel的属性类
     AttributeKey<Boolean> LOGIN = AttributeKey.newInstance("login");
 }

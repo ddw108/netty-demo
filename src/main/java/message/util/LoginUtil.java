@@ -6,7 +6,7 @@ import io.netty.util.Attribute;
 import message.attribute.Attributes;
 
 /**
- * 类注释，描述
+ * 设置登录标志位以及判断是否有标志位
  *
  * @author dengdingwwen
  * @version $Id: LoginUtil.java,v 1.0 2018/12/10 16:24 dengdingwwen
@@ -15,6 +15,7 @@ import message.attribute.Attributes;
 public class LoginUtil {
 
     public static void markAsLogin(Channel channel){
+        //给channel绑定属性
         channel.attr(Attributes.LOGIN).set(true);
     }
 

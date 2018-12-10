@@ -50,6 +50,7 @@ public class ClientHandler extends ChannelInboundHandlerAdapter {
         if(packet instanceof LoginResponsePacket){
             LoginResponsePacket loginResponsePacket = (LoginResponsePacket)packet;
             if (loginResponsePacket.isSuccess()) {
+                //给channel绑定属性（登录的属性）
                 LoginUtil.markAsLogin(ctx.channel());
                 System.out.println(new Date() + ": 客户端登录成功");
             } else {

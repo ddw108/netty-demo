@@ -72,6 +72,7 @@ public class NettyClient {
             if (future.isSuccess()) {
                 System.out.println(new Date() + ": 连接成功，启动控制台线程……");
                 Channel channel = ((ChannelFuture) future).channel();
+                // 连接成功之后，启动控制台线程
                 startConsoleThread(channel);
             } else if (retry == 0) {
                 System.err.println("重试次数已用完，放弃连接！");
@@ -90,11 +91,17 @@ public class NettyClient {
     private static void startConsoleThread(Channel channel){
         new Thread(()->{
            while (!Thread.interrupted()){
+               //判断是否为登录状态
                if(LoginUtil.hasLogin(channel)){
                    System.out.println("输入消息发送至服务端: ");
                    Scanner scanner = new Scanner(System.in);
                    String line = scanner.nextLine();
-
+                   /**
+                    * 从控制台获取消息之后
+                    * 将消息封装成消息对象
+                    * 然后将消息编码成 ByteBuf
+                    * 最后通过 writeAndFlush() 将消息写到服务端
+                    */
                    MessageRequestPacket packet = new MessageRequestPacket();
                    packet.setMessage(line);
                    ByteBuf byteBuf  = PacketCode.INSTANCE.encode(channel.alloc(), packet);
