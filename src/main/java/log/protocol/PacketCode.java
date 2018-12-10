@@ -9,9 +9,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static log.protocol.Command.LOGIN_REQUEST;
+import static log.protocol.Command.LOGIN_RESPONSE;
 
 /**
- * 类注释，描述
+ * Packet的操作类（单例）
  *
  * @author dengdingwwen
  * @version $Id: PacketCode.java,v 1.0 2018/12/10 10:27 dengdingwwen
@@ -28,7 +29,7 @@ public class PacketCode {
     private PacketCode() {
         packetTypeMap = new HashMap<>();
         packetTypeMap.put(LOGIN_REQUEST, LoginRequestPacket.class);
-        //packetTypeMap.put(LOGIN_RESPONSE, LoginResponsePacket.class);
+        packetTypeMap.put(LOGIN_RESPONSE, LoginResponsePacket.class);
 
         serializerMap = new HashMap<>();
         Serializer serializer = new JSONSerializer();

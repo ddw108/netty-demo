@@ -3,7 +3,7 @@ package log.protocol;
 import lombok.Data;
 
 /**
- * 类注释，描述
+ * Packet的抽象类（相当于Type的父类）
  *
  * @author dengdingwwen
  * @version $Id: Packet.java,v 1.0 2018/12/10 9:52 dengdingwwen

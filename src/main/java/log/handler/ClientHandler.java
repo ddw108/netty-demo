@@ -1,4 +1,4 @@
-package log.Handler;
+package log.handler;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
@@ -12,7 +12,7 @@ import java.util.Date;
 import java.util.UUID;
 
 /**
- * 类注释，描述
+ * 客户端配置
  *
  * @author dengdingwwen
  * @version $Id: ClientHandler.java,v 1.0 2018/12/10 11:37 dengdingwwen

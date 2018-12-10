@@ -3,7 +3,7 @@ package log.serialize;
 import log.serialize.impl.JSONSerializer;
 
 /**
- * 类注释，描述
+ * JSON方法的接口
  *
  * @author dengdingwwen
  * @version $Id: Serializer.java,v 1.0 2018/12/10 10:03 dengdingwwen

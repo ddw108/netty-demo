@@ -5,7 +5,7 @@ import log.serialize.Serializer;
 import log.serialize.SerializerAlgorithm;
 
 /**
- * 类注释，描述
+ * JSON方法的实现
  *
  * @author dengdingwwen
  * @version $Id: JSONSerializer.java,v 1.0 2018/12/10 10:14 dengdingwwen

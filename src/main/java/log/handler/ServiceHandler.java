@@ -1,4 +1,4 @@
-package log.Handler;
+package log.handler;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
@@ -11,7 +11,7 @@ import log.protocol.PacketCode;
 import java.util.Date;
 
 /**
- * 类注释，描述
+ * 服务端配置
  *
  * @author dengdingwwen
  * @version $Id: ServiceHandler.java,v 1.0 2018/12/10 11:38 dengdingwwen

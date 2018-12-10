@@ -6,12 +6,12 @@ import io.netty.channel.ChannelOption;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
-import log.Handler.ServiceHandler;
+import log.handler.ServiceHandler;
 
 import java.util.Date;
 
 /**
- * 类注释，描述
+ * 服务端启动
  *
  * @author dengdingwwen
  * @version $Id: NettyService.java,v 1.0 2018/12/10 11:39 dengdingwwen
@@ -22,12 +22,12 @@ public class NettyService {
     private static final int PORT = 8001;
 
     public static void main(String[] args) {
-        NioEventLoopGroup boosGroup = new NioEventLoopGroup();
+        NioEventLoopGroup bossGroup = new NioEventLoopGroup();
         NioEventLoopGroup workerGroup = new NioEventLoopGroup();
 
         final ServerBootstrap serverBootstrap = new ServerBootstrap();
         serverBootstrap
-                .group(boosGroup, workerGroup)
+                .group(bossGroup, workerGroup)
                 .channel(NioServerSocketChannel.class)
                 .option(ChannelOption.SO_BACKLOG, 1024)
                 .childOption(ChannelOption.SO_KEEPALIVE, true)

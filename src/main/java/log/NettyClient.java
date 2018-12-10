@@ -6,13 +6,13 @@ import io.netty.channel.ChannelOption;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
-import log.Handler.ClientHandler;
+import log.handler.ClientHandler;
 
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 /**
- * 类注释，描述
+ * 客户端启动
  *
  * @author dengdingwwen
  * @version $Id: NettyClient.java,v 1.0 2018/12/10 11:39 dengdingwwen

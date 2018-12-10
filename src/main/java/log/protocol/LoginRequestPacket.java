@@ -5,7 +5,7 @@ import lombok.Data;
 import static log.protocol.Command.LOGIN_REQUEST;
 
 /**
- * 类注释，描述
+ * 请求的Packet
  *
  * @author dengdingwwen
  * @version $Id: LoginRequestPacket.java,v 1.0 2018/12/10 9:58 dengdingwwen
