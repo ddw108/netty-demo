@@ -19,7 +19,9 @@ import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
 /**
- * 客户端启动
+ * 对于客户端的启动来说，
+ * 和服务端的启动类似，
+ * 依然需要线程模型、IO 模型，以及 IO 业务处理逻辑三大参数
  *
  * @author dengdingwwen
  * @version $Id: NettyClient.java,v 1.0 2018/12/10 11:39 dengdingwwen
@@ -33,26 +35,39 @@ public class NettyClient {
 
 
     public static void main(String[] args) {
+        //客户端引导类
         NioEventLoopGroup workerGroup = new NioEventLoopGroup();
 
+        //客户端线程组
         Bootstrap bootstrap = new Bootstrap();
         bootstrap
+                //指定线程模型
                 .group(workerGroup)
+                //指定 IO 类型为 NIO
                 .channel(NioSocketChannel.class)
+                //设置TCP底层数据
+                //连接超时时间
                 .option(ChannelOption.CONNECT_TIMEOUT_MILLIS, 5000)
+                //底层心跳机制
                 .option(ChannelOption.SO_KEEPALIVE, true)
+                //实时性相关
                 .option(ChannelOption.TCP_NODELAY, true)
+                //childHandler()用于指定处理新连接数据的读写处理逻辑
+                //handler()用于指定在服务端启动过程中的一些逻辑
                 .handler(new ChannelInitializer<SocketChannel>() {
                     @Override
                     public void initChannel(SocketChannel ch) {
+                        //指定连接数据读写逻辑
+                        //pipeline体现责任链模式
+                        //addLast添加逻辑处理器
                         ch.pipeline().addLast(new ClientHandler());
                     }
                 });
-
         connect(bootstrap, HOST, PORT, MAX_RETRY);
     }
 
     private static void connect(Bootstrap bootstrap, String host, int port, int retry) {
+        //建立连接
         bootstrap.connect(host, port).addListener(future -> {
             if (future.isSuccess()) {
                 System.out.println(new Date() + ": 连接成功，启动控制台线程……");

@@ -16,6 +16,7 @@ import java.util.Date;
  */
 public class ServiceHandler extends ChannelInboundHandlerAdapter {
 
+    //接收到客户端发来的数据之后被回调
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
         ByteBuf requestByteBuf = (ByteBuf) msg;

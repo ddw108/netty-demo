@@ -44,6 +44,7 @@ public class PacketCode {
         byte[] bytes = Serializer.DEFAULT.serialize(packet);
 
         // 3. 实际编码过程
+        //填充数据到ByteBuf
         byteBuf.writeInt(MAGIC_NUMBER);
         byteBuf.writeByte(packet.getVersion());
         byteBuf.writeByte(Serializer.DEFAULT.getSerializerAlgorithm());
