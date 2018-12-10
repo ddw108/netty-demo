@@ -1,0 +1,93 @@
+package log.protocol;
+
+import io.netty.buffer.ByteBuf;
+import io.netty.buffer.ByteBufAllocator;
+import log.serialize.Serializer;
+import log.serialize.impl.JSONSerializer;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import static log.protocol.Command.LOGIN_REQUEST;
+
+/**
+ * 类注释，描述
+ *
+ * @author dengdingwwen
+ * @version $Id: PacketCode.java,v 1.0 2018/12/10 10:27 dengdingwwen
+ * @date 2018/12/10 10:27
+ */
+public class PacketCode {
+
+    private static final int MAGIC_NUMBER = 0x12345678;
+    public static final PacketCode INSTANCE = new PacketCode();
+
+    private final Map<Byte, Class<? extends Packet>> packetTypeMap;
+    private final Map<Byte, Serializer> serializerMap;
+
+    private PacketCode() {
+        packetTypeMap = new HashMap<>();
+        packetTypeMap.put(LOGIN_REQUEST, LoginRequestPacket.class);
+        //packetTypeMap.put(LOGIN_RESPONSE, LoginResponsePacket.class);
+
+        serializerMap = new HashMap<>();
+        Serializer serializer = new JSONSerializer();
+        serializerMap.put(serializer.getSerializerAlgorithm(), serializer);
+    }
+
+    public ByteBuf encode(ByteBufAllocator byteBufAllocator, Packet packet){
+        // 1. 创建 ByteBuf 对象
+        ByteBuf byteBuf = byteBufAllocator.ioBuffer();
+        // 2. 序列化 java 对象
+        byte[] bytes = Serializer.DEFAULT.serialize(packet);
+
+        // 3. 实际编码过程
+        byteBuf.writeInt(MAGIC_NUMBER);
+        byteBuf.writeByte(packet.getVersion());
+        byteBuf.writeByte(Serializer.DEFAULT.getSerializerAlgorithm());
+        byteBuf.writeByte(packet.getCommand());
+        byteBuf.writeInt(bytes.length);
+        byteBuf.writeBytes(bytes);
+
+        return byteBuf;
+    }
+
+    public Packet decode(ByteBuf byteBuf){
+        // 跳过 magic number
+        byteBuf.skipBytes(4);
+
+        // 跳过版本号
+        byteBuf.skipBytes(1);
+
+        // 序列化算法标识
+        byte serializeAlgorithm = byteBuf.readByte();
+
+        // 指令
+        byte command = byteBuf.readByte();
+
+        // 数据包长度
+        int length = byteBuf.readInt();
+
+        byte[] bytes = new byte[length];
+        byteBuf.readBytes(bytes);
+
+        Class<? extends Packet> requestType = getRequestType(command);
+        Serializer serializer = getSerializer(serializeAlgorithm);
+
+        if(requestType != null && serializer != null){
+            return serializer.deserialize(requestType, bytes);
+        }
+
+        return null;
+    }
+
+    private Class<? extends Packet> getRequestType(byte command) {
+
+        return packetTypeMap.get(command);
+    }
+
+    private Serializer getSerializer(byte serializeAlgorithm) {
+
+        return serializerMap.get(serializeAlgorithm);
+    }
+}
