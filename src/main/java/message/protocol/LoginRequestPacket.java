@@ -1,8 +1,8 @@
-package log.protocol;
+package message.protocol;
 
 import lombok.Data;
 
-import static log.protocol.Command.LOGIN_REQUEST;
+import static message.protocol.Command.LOGIN_REQUEST;
 
 /**
  * 请求的Packet

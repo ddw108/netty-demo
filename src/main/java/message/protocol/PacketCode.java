@@ -1,15 +1,14 @@
-package log.protocol;
+package message.protocol;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.ByteBufAllocator;
-import log.serialize.Serializer;
-import log.serialize.impl.JSONSerializer;
+import message.serialize.Serializer;
+import message.serialize.impl.JSONSerializer;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import static log.protocol.Command.LOGIN_REQUEST;
-import static log.protocol.Command.LOGIN_RESPONSE;
+import static message.protocol.Command.*;
 
 /**
  * Packet的操作类（单例）
@@ -30,6 +29,8 @@ public class PacketCode {
         packetTypeMap = new HashMap<>();
         packetTypeMap.put(LOGIN_REQUEST, LoginRequestPacket.class);
         packetTypeMap.put(LOGIN_RESPONSE, LoginResponsePacket.class);
+        packetTypeMap.put(MESSAGE_REQUEST, MessageRequestPacket.class);
+        packetTypeMap.put(MESSAGE_RESPONSE, MessageResponsePacket.class);
 
         serializerMap = new HashMap<>();
         Serializer serializer = new JSONSerializer();

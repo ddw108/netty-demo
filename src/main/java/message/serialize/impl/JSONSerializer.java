@@ -1,8 +1,8 @@
-package log.serialize.impl;
+package message.serialize.impl;
 
 import com.alibaba.fastjson.JSON;
-import log.serialize.Serializer;
-import log.serialize.SerializerAlgorithm;
+import message.serialize.Serializer;
+import message.serialize.SerializerAlgorithm;
 
 /**
  * JSON方法的实现

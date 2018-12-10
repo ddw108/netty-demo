@@ -1,6 +1,6 @@
-package log.serialize;
+package message.serialize;
 
-import log.serialize.impl.JSONSerializer;
+import message.serialize.impl.JSONSerializer;
 
 /**
  * JSON方法的接口

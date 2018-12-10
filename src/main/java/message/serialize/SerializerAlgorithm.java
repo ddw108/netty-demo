@@ -1,4 +1,4 @@
-package log.serialize;
+package message.serialize;
 
 /**
  * JSON方法描述
