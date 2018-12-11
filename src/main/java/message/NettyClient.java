@@ -60,6 +60,9 @@ public class NettyClient {
                         //指定连接数据读写逻辑
                         //pipeline体现责任链模式
                         //addLast添加逻辑处理器
+                        //客户端
+                        ch.pipeline().addLast(new VerifyHandler());
+                        //ch.pipeline().addLast(new StickyResponseHandler());
                         ch.pipeline().addLast(new DecoderHandler());
                         ch.pipeline().addLast(new LoginResponseHandler());
                         ch.pipeline().addLast(new MessageResponseHandler());
@@ -113,3 +116,10 @@ public class NettyClient {
         }).start();
     }
 }
+
+
+//                   for(int i = 0; i < 100; i++){
+//                       MessageRequestPacket packet = new MessageRequestPacket();
+//                       packet.setMessage("邓鼎文-电子科技大学-2012-2016-2019-四川-成都-成华区-建设北路");
+//                       channel.writeAndFlush(packet);
+//                   }
