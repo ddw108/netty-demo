@@ -8,7 +8,7 @@ import java.nio.charset.Charset;
 import java.util.Date;
 
 /**
- * 类注释，描述
+ * 模拟粘包
  *
  * @author dengdingwwen
  * @version $Id: StickyRequestHandler.java,v 1.0 2018/12/11 14:35 dengdingwwen

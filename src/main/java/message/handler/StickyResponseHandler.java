@@ -7,7 +7,7 @@ import io.netty.channel.ChannelInboundHandlerAdapter;
 import java.nio.charset.Charset;
 
 /**
- * 类注释，描述
+ * 模拟粘包
  *
  * @author dengdingwwen
  * @version $Id: StickyResponseHandler.java,v 1.0 2018/12/11 14:35 dengdingwwen
