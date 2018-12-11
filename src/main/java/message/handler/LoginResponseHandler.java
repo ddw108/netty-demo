@@ -10,7 +10,9 @@ import java.util.Date;
 import java.util.UUID;
 
 /**
- * 类注释，描述
+ * SimpleChannelInboundHandler通过指定泛型的类型，来确定对应处理的类型
+ * 如果可以处理则自己处理，否则传递给下一个
+ * 体现责任链模式
  *
  * @author dengdingwwen
  * @version $Id: LoginResponseHandler.java,v 1.0 2018/12/11 11:47 dengdingwwen
@@ -18,6 +20,7 @@ import java.util.UUID;
  */
 public class LoginResponseHandler extends SimpleChannelInboundHandler<LoginResponsePacket> {
 
+    //接收到服务端发来的数据之后被回调
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, LoginResponsePacket loginResponsePacket) throws Exception {
         if (loginResponsePacket.isSuccess()) {
@@ -29,6 +32,7 @@ public class LoginResponseHandler extends SimpleChannelInboundHandler<LoginRespo
         }
     }
 
+    //该方法会在客户端建立连接成功后被调用
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
         System.out.println(new Date() + ": 客户端开始登录");

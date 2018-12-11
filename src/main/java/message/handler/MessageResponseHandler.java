@@ -7,7 +7,9 @@ import message.protocol.MessageResponsePacket;
 import java.util.Date;
 
 /**
- * 类注释，描述
+ * SimpleChannelInboundHandler通过指定泛型的类型，来确定对应处理的类型
+ * 如果可以处理则自己处理，否则传递给下一个
+ * 体现责任链模式
  *
  * @author dengdingwwen
  * @version $Id: MessageResponseHandler.java,v 1.0 2018/12/11 11:52 dengdingwwen

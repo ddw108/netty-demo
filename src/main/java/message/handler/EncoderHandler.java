@@ -7,7 +7,7 @@ import message.protocol.Packet;
 import message.protocol.PacketCode;
 
 /**
- * 类注释，描述
+ * 把响应对象编码成 ByteBuf
  *
  * @author dengdingwwen
  * @version $Id: EncoderHandler.java,v 1.0 2018/12/11 11:42 dengdingwwen
