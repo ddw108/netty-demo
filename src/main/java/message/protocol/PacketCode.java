@@ -1,7 +1,6 @@
 package message.protocol;
 
 import io.netty.buffer.ByteBuf;
-import io.netty.buffer.ByteBufAllocator;
 import message.serialize.Serializer;
 import message.serialize.impl.JSONSerializer;
 
@@ -37,9 +36,10 @@ public class PacketCode {
         serializerMap.put(serializer.getSerializerAlgorithm(), serializer);
     }
 
-    public ByteBuf encode(ByteBufAllocator byteBufAllocator, Packet packet){
+    public void encode(ByteBuf byteBuf, Packet packet){
         // 1. 创建 ByteBuf 对象
-        ByteBuf byteBuf = byteBufAllocator.ioBuffer();
+        //ByteBuf byteBuf= byteBufAllocator.ioBuffer();
+
         // 2. 序列化 java 对象
         byte[] bytes = Serializer.DEFAULT.serialize(packet);
 
@@ -51,8 +51,6 @@ public class PacketCode {
         byteBuf.writeByte(packet.getCommand());
         byteBuf.writeInt(bytes.length);
         byteBuf.writeBytes(bytes);
-
-        return byteBuf;
     }
 
     public Packet decode(ByteBuf byteBuf){

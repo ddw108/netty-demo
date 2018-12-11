@@ -6,7 +6,7 @@ import io.netty.channel.ChannelOption;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
-import message.handler.ServiceHandler;
+import message.handler.*;
 
 import java.util.Date;
 
@@ -50,7 +50,10 @@ public class NettyService {
                     @Override
                     protected void initChannel(NioSocketChannel ch) {
                         //指定连接数据读写逻辑
-                        ch.pipeline().addLast(new ServiceHandler());
+                        ch.pipeline().addLast(new DecoderHandler());
+                        ch.pipeline().addLast(new LoginResquestHandler());
+                        ch.pipeline().addLast(new MessageResquestHandler());
+                        ch.pipeline().addLast(new EncoderHandler());
                     }
                 });
         bind(serverBootstrap, PORT);

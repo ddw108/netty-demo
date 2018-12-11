@@ -9,7 +9,7 @@ import io.netty.channel.ChannelOption;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
-import message.handler.ClientHandler;
+import message.handler.*;
 import message.protocol.MessageRequestPacket;
 import message.protocol.PacketCode;
 import message.util.LoginUtil;
@@ -60,7 +60,10 @@ public class NettyClient {
                         //指定连接数据读写逻辑
                         //pipeline体现责任链模式
                         //addLast添加逻辑处理器
-                        ch.pipeline().addLast(new ClientHandler());
+                        ch.pipeline().addLast(new DecoderHandler());
+                        ch.pipeline().addLast(new LoginResponseHandler());
+                        ch.pipeline().addLast(new MessageResponseHandler());
+                        ch.pipeline().addLast(new EncoderHandler());
                     }
                 });
         connect(bootstrap, HOST, PORT, MAX_RETRY);
@@ -104,8 +107,7 @@ public class NettyClient {
                     */
                    MessageRequestPacket packet = new MessageRequestPacket();
                    packet.setMessage(line);
-                   ByteBuf byteBuf  = PacketCode.INSTANCE.encode(channel.alloc(), packet);
-                   channel.writeAndFlush(byteBuf);
+                   channel.writeAndFlush(packet);
                }
            }
         }).start();
