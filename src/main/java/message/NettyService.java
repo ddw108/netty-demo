@@ -52,6 +52,7 @@ public class NettyService {
                         //指定连接数据读写逻辑
                         //服务端
                         ch.pipeline().addLast(new VerifyHandler());
+                        //ch.pipeline().addLast(new LifeCyCleTestHandler());
                         //ch.pipeline().addLast(new StickyRequestHandler());
                         ch.pipeline().addLast(new DecoderHandler());
                         ch.pipeline().addLast(new LoginResquestHandler());
