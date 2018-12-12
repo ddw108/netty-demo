@@ -50,4 +50,9 @@ public class LoginResponseHandler extends SimpleChannelInboundHandler<LoginRespo
         //写数据
         ctx.channel().writeAndFlush(loginPacket);
     }
+
+    @Override
+    public void channelInactive(ChannelHandlerContext ctx) throws Exception {
+        System.out.println("客户端连接被关闭!");
+    }
 }
