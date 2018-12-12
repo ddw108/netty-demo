@@ -14,10 +14,22 @@ import static message.protocol.Command.MESSAGE_RESPONSE;
 @Data
 public class MessageResponsePacket extends Packet{
 
-    String message;
+    private String fromUserId;
+
+    private String fromUserName;
+
+    private String message;
 
     @Override
     public Byte getCommand() {
         return MESSAGE_RESPONSE;
+    }
+
+    public MessageResponsePacket(String fromUserName, String message){
+        this.fromUserName = fromUserName;
+        this.message = message;
+    }
+
+    public MessageResponsePacket(){
     }
 }

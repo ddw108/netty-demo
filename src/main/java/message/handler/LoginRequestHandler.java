@@ -4,9 +4,11 @@ import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import message.protocol.LoginRequestPacket;
 import message.protocol.LoginResponsePacket;
-import message.util.LoginUtil;
+import message.util.Session;
+import message.util.SessionUtil;
 
 import java.util.Date;
+import java.util.UUID;
 
 /**
  * SimpleChannelInboundHandler通过指定泛型的类型，来确定对应处理的类型
@@ -14,21 +16,24 @@ import java.util.Date;
  * 体现责任链模式
  *
  * @author dengdingwwen
- * @version $Id: LoginResquestHandler.java,v 1.0 2018/12/11 11:55 dengdingwwen
+ * @version $Id: LoginRequestHandler.java,v 1.0 2018/12/11 11:55 dengdingwwen
  * @date 2018/12/11 11:55
  */
-public class LoginResquestHandler extends SimpleChannelInboundHandler<LoginRequestPacket> {
+public class LoginRequestHandler extends SimpleChannelInboundHandler<LoginRequestPacket> {
 
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, LoginRequestPacket packet) throws Exception {
-        System.out.println(new Date() + ": 客户端开始登录……");
         // 登录流程
         LoginResponsePacket loginResponsePacket = new LoginResponsePacket();
         loginResponsePacket.setVersion(packet.getVersion());
+        loginResponsePacket.setUserName(packet.getUserName());
+
         if (valid(packet)) {
             loginResponsePacket.setSuccess(true);
-            System.out.println(new Date() + ": 登录成功!");
-            LoginUtil.markAsLogin(ctx.channel());
+            String userId = randomUserId();
+            loginResponsePacket.setUserId(userId);
+            System.out.println(new Date() + "[" + loginResponsePacket.getUserName() + "]: 登录成功!");
+            SessionUtil.bindSession(new Session(userId, loginResponsePacket.getUserName()), ctx.channel());
         } else {
             loginResponsePacket.setReason("账号密码校验失败");
             loginResponsePacket.setSuccess(false);
@@ -40,5 +45,14 @@ public class LoginResquestHandler extends SimpleChannelInboundHandler<LoginReque
 
     private boolean valid(LoginRequestPacket loginRequestPacket) {
         return true;
+    }
+
+    private static String randomUserId() {
+        return UUID.randomUUID().toString().split("-")[0];
+    }
+
+    @Override
+    public void channelInactive(ChannelHandlerContext ctx) throws Exception {
+        SessionUtil.unBindSession(ctx.channel());
     }
 }

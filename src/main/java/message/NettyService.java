@@ -55,9 +55,9 @@ public class NettyService {
                         //ch.pipeline().addLast(new LifeCyCleTestHandler());
                         //ch.pipeline().addLast(new StickyRequestHandler());
                         ch.pipeline().addLast(new DecoderHandler());
-                        ch.pipeline().addLast(new LoginResquestHandler());
+                        ch.pipeline().addLast(new LoginRequestHandler());
                         ch.pipeline().addLast(new AuthHandler());
-                        ch.pipeline().addLast(new MessageResquestHandler());
+                        ch.pipeline().addLast(new MessageRequestHandler());
                         ch.pipeline().addLast(new EncoderHandler());
                     }
                 });

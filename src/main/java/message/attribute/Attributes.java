@@ -1,6 +1,7 @@
 package message.attribute;
 
 import io.netty.util.AttributeKey;
+import message.util.Session;
 
 /**
  * 是否登录成功的标志位
@@ -11,5 +12,5 @@ import io.netty.util.AttributeKey;
  */
 public interface Attributes {
     //channel的属性类
-    AttributeKey<Boolean> LOGIN = AttributeKey.newInstance("login");
+    AttributeKey<Session> SESSION = AttributeKey.newInstance("session");
 }

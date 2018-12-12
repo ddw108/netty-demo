@@ -9,7 +9,9 @@ import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import message.handler.*;
+import message.protocol.LoginRequestPacket;
 import message.protocol.MessageRequestPacket;
+import message.util.SessionUtil;
 
 import java.util.Date;
 import java.util.Scanner;
@@ -92,23 +94,37 @@ public class NettyClient {
     }
 
     private static void startConsoleThread(Channel channel) {
+
+        Scanner sc = new Scanner(System.in);
+        LoginRequestPacket loginRequestPacket = new LoginRequestPacket();
+
         new Thread(() -> {
             while (!Thread.interrupted()) {
-                //判断是否为登录状态
-                System.out.println("输入消息发送至服务端: ");
-                Scanner scanner = new Scanner(System.in);
-                String line = scanner.nextLine();
-                /**
-                 * 从控制台获取消息之后
-                 * 将消息封装成消息对象
-                 * 然后将消息编码成 ByteBuf
-                 * 最后通过 writeAndFlush() 将消息写到服务端
-                 */
-                MessageRequestPacket packet = new MessageRequestPacket();
-                packet.setMessage(line);
-                channel.writeAndFlush(packet);
+                if (!SessionUtil.hasLogin(channel)) {
+                    System.out.print("输入用户名登录: ");
+                    String username = sc.nextLine();
+                    loginRequestPacket.setUserName(username);
+
+                    // 密码使用默认的
+                    loginRequestPacket.setPassWord("pwd");
+
+                    // 发送登录数据包
+                    channel.writeAndFlush(loginRequestPacket);
+                    waitForLoginResponse();
+                } else {
+                    String toUserId = sc.next();
+                    String message = sc.next();
+                    channel.writeAndFlush(new MessageRequestPacket(toUserId, message));
+                }
             }
         }).start();
+    }
+
+    private static void waitForLoginResponse() {
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException ignored) {
+        }
     }
 }
 
