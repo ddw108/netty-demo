@@ -1,7 +1,6 @@
 package message;
 
 import io.netty.bootstrap.Bootstrap;
-import io.netty.buffer.ByteBuf;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInitializer;
@@ -11,8 +10,6 @@ import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import message.handler.*;
 import message.protocol.MessageRequestPacket;
-import message.protocol.PacketCode;
-import message.util.LoginUtil;
 
 import java.util.Date;
 import java.util.Scanner;
