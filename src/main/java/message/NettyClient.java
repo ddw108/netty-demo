@@ -60,13 +60,26 @@ public class NettyClient {
                         //pipeline体现责任链模式
                         //addLast添加逻辑处理器
                         //客户端
+                        // 校验+解决粘包处理器
                         ch.pipeline().addLast(new VerifyHandler());
                         //ch.pipeline().addLast(new StickyResponseHandler());
+                        // 解码处理器
                         ch.pipeline().addLast(new DecoderHandler());
+                        // 登录响应处理器
                         ch.pipeline().addLast(new LoginResponseHandler());
-                        ch.pipeline().addLast(new LogoutResponseHandler());
+                        // 收消息处理器
                         ch.pipeline().addLast(new MessageResponseHandler());
+                        // 创建群响应处理器
                         ch.pipeline().addLast(new CreateGroupResponseHandler());
+                        // 加群响应处理器
+                        ch.pipeline().addLast(new JoinGroupResponseHandler());
+                        // 退群响应处理器
+                        ch.pipeline().addLast(new QuitGroupResponseHandler());
+                        // 获取群成员响应处理器
+                        ch.pipeline().addLast(new ListGroupMembersResponseHandler());
+                        // 登出响应处理器
+                        ch.pipeline().addLast(new LogoutResponseHandler());
+                        // 编码处理器
                         ch.pipeline().addLast(new EncoderHandler());
                     }
                 });

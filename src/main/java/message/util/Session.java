@@ -1,6 +1,7 @@
 package message.util;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * 类注释，描述
@@ -10,6 +11,7 @@ import lombok.Data;
  * @date 2018/12/12 15:30
  */
 @Data
+@NoArgsConstructor
 public class Session {
 
     private String userId;

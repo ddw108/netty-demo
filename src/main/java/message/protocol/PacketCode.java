@@ -35,6 +35,12 @@ public class PacketCode {
         packetTypeMap.put(LOGOUT_RESPONSE, LogoutResponsePacket.class);
         packetTypeMap.put(CREATE_GROUP_REQUEST, CreateGroupRequestPacket.class);
         packetTypeMap.put(CREATE_GROUP_RESPONSE, CreateGroupResponsePacket.class);
+        packetTypeMap.put(JOIN_GROUP_REQUEST, JoinGroupRequestPacket.class);
+        packetTypeMap.put(JOIN_GROUP_RESPONSE, JoinGroupResponsePacket.class);
+        packetTypeMap.put(QUIT_GROUP_REQUEST, QuitGroupRequestPacket.class);
+        packetTypeMap.put(QUIT_GROUP_RESPONSE, QuitGroupResponsePacket.class);
+        packetTypeMap.put(LIST_GROUP_MEMBERS_REQUEST, ListGroupMembersRequestPacket.class);
+        packetTypeMap.put(LIST_GROUP_MEMBERS_RESPONSE, ListGroupMembersResponsePacket.class);
         serializerMap = new HashMap<>();
         Serializer serializer = new JSONSerializer();
         serializerMap.put(serializer.getSerializerAlgorithm(), serializer);

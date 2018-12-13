@@ -1,10 +1,7 @@
 package message.protocol;
 
 import io.netty.channel.Channel;
-import message.protocol.ConsoleCommand;
-import message.protocol.console.CreateGroupConsoleCommand;
-import message.protocol.console.LogoutConsoleCommand;
-import message.protocol.console.SendToUserConsoleCommand;
+import message.protocol.console.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -26,6 +23,9 @@ public class ConsoleCommandManager implements ConsoleCommand {
         consoleCommandMap.put("sendToUser", new SendToUserConsoleCommand());
         consoleCommandMap.put("logout", new LogoutConsoleCommand());
         consoleCommandMap.put("createGroup", new CreateGroupConsoleCommand());
+        consoleCommandMap.put("joinGroup", new JoinGroupConsoleCommand());
+        consoleCommandMap.put("quitGroup", new QuitGroupConsoleCommand());
+        consoleCommandMap.put("listGroupMembers", new ListGroupMembersConsoleCommand());
     }
 
     @Override
