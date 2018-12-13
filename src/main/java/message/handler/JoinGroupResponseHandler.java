@@ -5,7 +5,7 @@ import io.netty.channel.SimpleChannelInboundHandler;
 import message.protocol.packet.JoinGroupResponsePacket;
 
 /**
- * 类注释，描述
+ * 加入群聊的response处理器
  *
  * @author dengdingwwen
  * @version $Id: JoinGroupResponseHandler.java,v 1.0 2018/12/13 14:31 dengdingwwen

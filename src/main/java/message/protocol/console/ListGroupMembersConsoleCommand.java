@@ -7,7 +7,7 @@ import message.protocol.packet.ListGroupMembersRequestPacket;
 import java.util.Scanner;
 
 /**
- * 类注释，描述
+ * 显示组成员的控制台命令
  *
  * @author dengdingwwen
  * @version $Id: ListGroupMembersConsoleCommand.java,v 1.0 2018/12/13 14:58 dengdingwwen

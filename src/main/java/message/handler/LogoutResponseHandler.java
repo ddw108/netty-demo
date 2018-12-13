@@ -6,7 +6,7 @@ import message.protocol.packet.LogoutResponsePacket;
 import message.util.SessionUtil;
 
 /**
- * 类注释，描述
+ * 登出的response处理器
  *
  * @author dengdingwwen
  * @version $Id: LogoutResponseHandler.java,v 1.0 2018/12/13 10:17 dengdingwwen

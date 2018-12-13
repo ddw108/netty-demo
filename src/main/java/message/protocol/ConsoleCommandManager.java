@@ -8,7 +8,7 @@ import java.util.Map;
 import java.util.Scanner;
 
 /**
- * 类注释，描述
+ * 控制台命令
  *
  * @author dengdingwwen
  * @version $Id: ConsoleCommandManager.java,v 1.0 2018/12/13 9:48 dengdingwwen

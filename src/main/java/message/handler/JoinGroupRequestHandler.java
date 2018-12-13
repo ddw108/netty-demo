@@ -8,7 +8,7 @@ import message.protocol.packet.JoinGroupResponsePacket;
 import message.util.SessionUtil;
 
 /**
- * 类注释，描述
+ * 加入群聊的request处理器
  *
  * @author dengdingwwen
  * @version $Id: JoinGroupRequestHandler.java,v 1.0 2018/12/13 14:26 dengdingwwen

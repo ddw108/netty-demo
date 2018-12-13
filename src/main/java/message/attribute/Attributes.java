@@ -4,7 +4,7 @@ import io.netty.util.AttributeKey;
 import message.util.Session;
 
 /**
- * 是否登录成功的标志位
+ * 是否登录成功的标志位，针对Session
  *
  * @author dengdingwwen
  * @version $Id: Attributes.java,v 1.0 2018/12/10 15:50 dengdingwwen

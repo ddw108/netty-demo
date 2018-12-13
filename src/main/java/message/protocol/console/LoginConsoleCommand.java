@@ -7,7 +7,7 @@ import message.protocol.packet.LoginRequestPacket;
 import java.util.Scanner;
 
 /**
- * 类注释，描述
+ * 登录的控制台命令
  *
  * @author dengdingwwen
  * @version $Id: LoginConsoleCommand.java,v 1.0 2018/12/13 9:53 dengdingwwen

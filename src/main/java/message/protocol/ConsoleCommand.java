@@ -5,7 +5,7 @@ import io.netty.channel.Channel;
 import java.util.Scanner;
 
 /**
- * 类注释，描述
+ * 控制台命令接口
  *
  * @author dengdingwwen
  * @version $Id: ConsoleCommand.java,v 1.0 2018/12/13 9:45 dengdingwwen

@@ -1,7 +1,6 @@
 package message.protocol.packet;
 
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import message.protocol.Packet;
 
 import java.util.List;

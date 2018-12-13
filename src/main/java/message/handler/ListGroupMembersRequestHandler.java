@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 类注释，描述
+ * 显示群成员的request处理器
  *
  * @author dengdingwwen
  * @version $Id: ListGroupMembersRequestHandler.java,v 1.0 2018/12/13 15:01 dengdingwwen

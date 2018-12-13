@@ -7,7 +7,7 @@ import message.protocol.packet.QuitGroupRequestPacket;
 import java.util.Scanner;
 
 /**
- * 类注释，描述
+ * 退出群聊的控制台命令
  *
  * @author dengdingwwen
  * @version $Id: QuitGroupConsoleCommand.java,v 1.0 2018/12/13 14:45 dengdingwwen

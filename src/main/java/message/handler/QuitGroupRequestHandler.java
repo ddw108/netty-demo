@@ -8,7 +8,7 @@ import message.protocol.packet.QuitGroupResponsePacket;
 import message.util.SessionUtil;
 
 /**
- * 类注释，描述
+ * 退出群聊的request处理器
  *
  * @author dengdingwwen
  * @version $Id: QuitGroupRequestHandler.java,v 1.0 2018/12/13 14:48 dengdingwwen

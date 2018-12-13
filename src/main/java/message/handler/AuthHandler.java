@@ -6,6 +6,7 @@ import message.util.SessionUtil;
 
 /**
  * 判断是否登录
+ * 如已经登录，则移除该处理器
  *
  * @author dengdingwwen
  * @version $Id: AuthHandler.java,v 1.0 2018/12/12 14:24 dengdingwwen

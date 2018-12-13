@@ -5,7 +5,7 @@ import io.netty.channel.SimpleChannelInboundHandler;
 import message.protocol.packet.ListGroupMembersResponsePacket;
 
 /**
- * 类注释，描述
+ * 显示群成员的response处理器
  *
  * @author dengdingwwen
  * @version $Id: ListGroupMembersResponseHandler.java,v 1.0 2018/12/13 15:09 dengdingwwen

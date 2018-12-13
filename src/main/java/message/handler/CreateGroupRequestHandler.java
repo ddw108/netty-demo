@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.UUID;
 
 /**
- * 类注释，描述
+ * 创建群聊的request处理器
  *
  * @author dengdingwwen
  * @version $Id: CreateGroupRequestHandler.java,v 1.0 2018/12/13 10:19 dengdingwwen

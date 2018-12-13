@@ -28,6 +28,7 @@ public class LoginRequestHandler extends SimpleChannelInboundHandler<LoginReques
         loginResponsePacket.setVersion(packet.getVersion());
         loginResponsePacket.setUserName(packet.getUserName());
 
+        //如果成功登录
         if (valid(packet)) {
             loginResponsePacket.setSuccess(true);
             String userId = randomUserId();

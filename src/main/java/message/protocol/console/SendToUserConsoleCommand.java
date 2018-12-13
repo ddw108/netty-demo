@@ -7,7 +7,7 @@ import message.protocol.packet.MessageRequestPacket;
 import java.util.Scanner;
 
 /**
- * 类注释，描述
+ * 单聊的控制台命令
  *
  * @author dengdingwwen
  * @version $Id: SendToUserConsoleCommand.java,v 1.0 2018/12/13 9:56 dengdingwwen

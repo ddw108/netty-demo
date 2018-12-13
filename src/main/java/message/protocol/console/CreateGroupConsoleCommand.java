@@ -8,7 +8,7 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 /**
- * 类注释，描述
+ * 创建群聊的控制台命令
  *
  * @author dengdingwwen
  * @version $Id: CreateGroupConsoleCommand.java,v 1.0 2018/12/13 9:52 dengdingwwen

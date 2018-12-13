@@ -7,7 +7,7 @@ import message.protocol.packet.JoinGroupRequestPacket;
 import java.util.Scanner;
 
 /**
- * 类注释，描述
+ * 加入群聊的控制台命令
  *
  * @author dengdingwwen
  * @version $Id: JoinGroupConsoleCommand.java,v 1.0 2018/12/13 14:18 dengdingwwen

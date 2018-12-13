@@ -8,7 +8,7 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * 类注释，描述
+ * session的通用类
  *
  * @author dengdingwwen
  * @version $Id: SessionUtil.java,v 1.0 2018/12/12 15:31 dengdingwwen
