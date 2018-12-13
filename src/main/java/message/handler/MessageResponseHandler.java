@@ -2,9 +2,7 @@ package message.handler;
 
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
-import message.protocol.MessageResponsePacket;
-
-import java.util.Date;
+import message.protocol.packet.MessageResponsePacket;
 
 /**
  * SimpleChannelInboundHandler通过指定泛型的类型，来确定对应处理的类型

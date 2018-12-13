@@ -1,6 +1,7 @@
-package message.protocol;
+package message.protocol.packet;
 
 import lombok.Data;
+import message.protocol.Packet;
 
 import static message.protocol.Command.MESSAGE_RESPONSE;
 
@@ -12,7 +13,7 @@ import static message.protocol.Command.MESSAGE_RESPONSE;
  * @date 2018/12/10 15:38
  */
 @Data
-public class MessageResponsePacket extends Packet{
+public class MessageResponsePacket extends Packet {
 
     private String fromUserId;
 

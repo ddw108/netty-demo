@@ -1,7 +1,8 @@
-package message.protocol;
+package message.protocol.packet;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import message.protocol.Packet;
 
 import static message.protocol.Command.MESSAGE_REQUEST;
 
@@ -14,7 +15,7 @@ import static message.protocol.Command.MESSAGE_REQUEST;
  */
 @Data
 @NoArgsConstructor
-public class MessageRequestPacket extends Packet{
+public class MessageRequestPacket extends Packet {
 
     private String toUserId;
 
