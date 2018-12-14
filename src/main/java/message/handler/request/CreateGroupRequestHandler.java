@@ -1,6 +1,7 @@
-package message.handler;
+package message.handler.request;
 
 import io.netty.channel.Channel;
+import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.channel.group.ChannelGroup;
@@ -20,7 +21,14 @@ import java.util.UUID;
  * @version $Id: CreateGroupRequestHandler.java,v 1.0 2018/12/13 10:19 dengdingwwen
  * @date 2018/12/13 10:19
  */
+@ChannelHandler.Sharable
 public class CreateGroupRequestHandler extends SimpleChannelInboundHandler<CreateGroupRequestPacket> {
+
+    public static final CreateGroupRequestHandler INSTANCE = new CreateGroupRequestHandler();
+
+    private CreateGroupRequestHandler() {
+
+    }
 
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, CreateGroupRequestPacket msg) throws Exception {

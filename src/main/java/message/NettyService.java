@@ -7,6 +7,7 @@ import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import message.handler.*;
+import message.handler.request.*;
 
 import java.util.Date;
 
@@ -53,27 +54,27 @@ public class NettyService {
                         //服务端
                         // 校验+解决粘包处理器
                         ch.pipeline().addLast(new VerifyHandler());
-                        //ch.pipeline().addLast(new LifeCyCleTestHandler());
                         //ch.pipeline().addLast(new StickyRequestHandler());
                         // 解码处理器
                         ch.pipeline().addLast(new DecoderHandler());
                         // 登录请求处理器
-                        ch.pipeline().addLast(new LoginRequestHandler());
+                        ch.pipeline().addLast(LoginRequestHandler.INSTANCE);
                         // 判断是否登录处理器
-                        ch.pipeline().addLast(new AuthHandler());
+                        ch.pipeline().addLast(AuthHandler.INSTANCE);
                         // 单聊消息请求处理器
-                        ch.pipeline().addLast(new MessageRequestHandler());
+                        ch.pipeline().addLast(MessageRequestHandler.INSTANCE);
                         // 创建群请求处理器
-                        ch.pipeline().addLast(new CreateGroupRequestHandler());
+                        ch.pipeline().addLast(CreateGroupRequestHandler.INSTANCE);
                         // 加群请求处理器
-                        ch.pipeline().addLast(new JoinGroupRequestHandler());
+                        ch.pipeline().addLast(JoinGroupRequestHandler.INSTANCE);
                         // 退群请求处理器
-                        ch.pipeline().addLast(new QuitGroupRequestHandler());
+                        ch.pipeline().addLast(QuitGroupRequestHandler.INSTANCE);
                         // 获取群成员请求处理器
-                        ch.pipeline().addLast(new ListGroupMembersRequestHandler());
-                        ch.pipeline().addLast(new GroupMessageRequestHandler());
+                        ch.pipeline().addLast(ListGroupMembersRequestHandler.INSTANCE);
+                        // 发送群聊消息处理器
+                        ch.pipeline().addLast(GroupMessageRequestHandler.INSTANCE);
                         // 登出请求处理器
-                        ch.pipeline().addLast(new LogoutRequestHandler());
+                        ch.pipeline().addLast(LogoutRequestHandler.INSTANCE);
                         // 编码处理器
                         ch.pipeline().addLast(new EncoderHandler());
                     }

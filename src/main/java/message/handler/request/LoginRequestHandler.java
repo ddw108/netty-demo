@@ -1,5 +1,6 @@
-package message.handler;
+package message.handler.request;
 
+import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import message.protocol.packet.LoginRequestPacket;
@@ -19,7 +20,13 @@ import java.util.UUID;
  * @version $Id: LoginRequestHandler.java,v 1.0 2018/12/11 11:55 dengdingwwen
  * @date 2018/12/11 11:55
  */
+@ChannelHandler.Sharable
 public class LoginRequestHandler extends SimpleChannelInboundHandler<LoginRequestPacket> {
+
+    public static final LoginRequestHandler INSTANCE = new LoginRequestHandler();
+
+    protected LoginRequestHandler() {
+    }
 
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, LoginRequestPacket packet) throws Exception {

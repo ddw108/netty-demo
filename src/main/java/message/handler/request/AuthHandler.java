@@ -1,5 +1,6 @@
-package message.handler;
+package message.handler.request;
 
+import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 import message.util.SessionUtil;
@@ -12,7 +13,14 @@ import message.util.SessionUtil;
  * @version $Id: AuthHandler.java,v 1.0 2018/12/12 14:24 dengdingwwen
  * @date 2018/12/12 14:24
  */
+@ChannelHandler.Sharable
 public class AuthHandler extends ChannelInboundHandlerAdapter {
+
+    public static final AuthHandler INSTANCE = new AuthHandler();
+
+    private AuthHandler() {
+
+    }
 
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
