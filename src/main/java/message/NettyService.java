@@ -71,6 +71,7 @@ public class NettyService {
                         ch.pipeline().addLast(new QuitGroupRequestHandler());
                         // 获取群成员请求处理器
                         ch.pipeline().addLast(new ListGroupMembersRequestHandler());
+                        ch.pipeline().addLast(new GroupMessageRequestHandler());
                         // 登出请求处理器
                         ch.pipeline().addLast(new LogoutRequestHandler());
                         // 编码处理器
