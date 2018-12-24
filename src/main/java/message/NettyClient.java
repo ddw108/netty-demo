@@ -10,6 +10,7 @@ import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import message.handler.*;
 import message.handler.client.*;
+import message.handler.IMIdleStateHandler;
 import message.protocol.ConsoleCommandManager;
 import message.protocol.console.LoginConsoleCommand;
 import message.util.SessionUtil;
@@ -61,6 +62,8 @@ public class NettyClient {
                         //pipeline体现责任链模式
                         //addLast添加逻辑处理器
                         //客户端
+                        // 空闲检测
+                        ch.pipeline().addLast(new IMIdleStateHandler());
                         // 校验+解决粘包处理器
                         ch.pipeline().addLast(new VerifyHandler());
                         // 解码处理器
@@ -83,6 +86,8 @@ public class NettyClient {
                         ch.pipeline().addLast(new LogoutResponseHandler());
                         // 编码处理器
                         ch.pipeline().addLast(new EncoderHandler());
+                        // 发送心跳检测定时器
+                        ch.pipeline().addLast(new HeartBeatTimerHandler());
                     }
                 });
         connect(bootstrap, HOST, PORT, MAX_RETRY);

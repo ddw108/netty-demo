@@ -50,6 +50,8 @@ public class NettyService {
                 .childHandler(new ChannelInitializer<NioSocketChannel>() {
                     @Override
                     protected void initChannel(NioSocketChannel ch) {
+                        // 空闲检测
+                        ch.pipeline().addLast(new IMIdleStateHandler());
                         //指定连接数据读写逻辑
                         //服务端
                         // 校验+解决粘包处理器
@@ -58,6 +60,8 @@ public class NettyService {
                         ch.pipeline().addLast(PacketCodecHandler.INSTANCE);
                         // 登录请求处理器
                         ch.pipeline().addLast(LoginRequestHandler.INSTANCE);
+                        // 返回心跳检测处理器
+                        ch.pipeline().addLast(HeartBeatRequestHandler.INSTANCE);
                         // 判断是否登录处理器
                         ch.pipeline().addLast(AuthHandler.INSTANCE);
                         // 聊天相关请求处理器
