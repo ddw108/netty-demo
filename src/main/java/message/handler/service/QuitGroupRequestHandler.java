@@ -1,4 +1,4 @@
-package message.handler.request;
+package message.handler.service;
 
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
@@ -34,6 +34,6 @@ public class QuitGroupRequestHandler extends SimpleChannelInboundHandler<QuitGro
         QuitGroupResponsePacket quitGroupResponsePacket = new QuitGroupResponsePacket();
         quitGroupResponsePacket.setGroupId(groupId);
         quitGroupResponsePacket.setSuccess(true);
-        ctx.channel().writeAndFlush(quitGroupResponsePacket);
+        ctx.writeAndFlush(quitGroupResponsePacket);
     }
 }

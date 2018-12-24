@@ -7,7 +7,7 @@ import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import message.handler.*;
-import message.handler.request.*;
+import message.handler.service.*;
 
 import java.util.Date;
 
@@ -54,29 +54,14 @@ public class NettyService {
                         //服务端
                         // 校验+解决粘包处理器
                         ch.pipeline().addLast(new VerifyHandler());
-                        //ch.pipeline().addLast(new StickyRequestHandler());
-                        // 解码处理器
-                        ch.pipeline().addLast(new DecoderHandler());
+                        // 编码，解码处理器
+                        ch.pipeline().addLast(PacketCodecHandler.INSTANCE);
                         // 登录请求处理器
                         ch.pipeline().addLast(LoginRequestHandler.INSTANCE);
                         // 判断是否登录处理器
                         ch.pipeline().addLast(AuthHandler.INSTANCE);
-                        // 单聊消息请求处理器
-                        ch.pipeline().addLast(MessageRequestHandler.INSTANCE);
-                        // 创建群请求处理器
-                        ch.pipeline().addLast(CreateGroupRequestHandler.INSTANCE);
-                        // 加群请求处理器
-                        ch.pipeline().addLast(JoinGroupRequestHandler.INSTANCE);
-                        // 退群请求处理器
-                        ch.pipeline().addLast(QuitGroupRequestHandler.INSTANCE);
-                        // 获取群成员请求处理器
-                        ch.pipeline().addLast(ListGroupMembersRequestHandler.INSTANCE);
-                        // 发送群聊消息处理器
-                        ch.pipeline().addLast(GroupMessageRequestHandler.INSTANCE);
-                        // 登出请求处理器
-                        ch.pipeline().addLast(LogoutRequestHandler.INSTANCE);
-                        // 编码处理器
-                        ch.pipeline().addLast(new EncoderHandler());
+                        // 聊天相关请求处理器
+                        ch.pipeline().addLast(IMHandler.INSTANCE);
                     }
                 });
         bind(serverBootstrap, PORT);

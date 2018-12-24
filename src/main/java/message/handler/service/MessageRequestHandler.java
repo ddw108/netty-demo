@@ -1,4 +1,4 @@
-package message.handler.request;
+package message.handler.service;
 
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandler;

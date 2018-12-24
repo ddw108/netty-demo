@@ -9,7 +9,7 @@ import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import message.handler.*;
-import message.handler.response.*;
+import message.handler.client.*;
 import message.protocol.ConsoleCommandManager;
 import message.protocol.console.LoginConsoleCommand;
 import message.util.SessionUtil;
@@ -63,7 +63,6 @@ public class NettyClient {
                         //客户端
                         // 校验+解决粘包处理器
                         ch.pipeline().addLast(new VerifyHandler());
-                        //ch.pipeline().addLast(new StickyResponseHandler());
                         // 解码处理器
                         ch.pipeline().addLast(new DecoderHandler());
                         // 登录响应处理器
@@ -78,6 +77,7 @@ public class NettyClient {
                         ch.pipeline().addLast(new QuitGroupResponseHandler());
                         // 获取群成员响应处理器
                         ch.pipeline().addLast(new ListGroupMembersResponseHandler());
+                        // 发送群消息处理器
                         ch.pipeline().addLast(new GroupMessageResponseHandler());
                         // 登出响应处理器
                         ch.pipeline().addLast(new LogoutResponseHandler());
@@ -126,9 +126,3 @@ public class NettyClient {
     }
 }
 
-
-//                   for(int i = 0; i < 100; i++){
-//                       MessageRequestPacket packet = new MessageRequestPacket();
-//                       packet.setMessage("邓鼎文-电子科技大学-2012-2016-2019-四川-成都-成华区-建设北路");
-//                       channel.writeAndFlush(packet);
-//                   }

@@ -1,6 +1,5 @@
 package message.protocol.packet;
 
-import io.netty.channel.Channel;
 import lombok.Data;
 import message.protocol.Packet;
 import message.util.Session;

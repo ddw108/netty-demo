@@ -1,4 +1,4 @@
-package message.handler.request;
+package message.handler.service;
 
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
@@ -34,6 +34,6 @@ public class JoinGroupRequestHandler extends SimpleChannelInboundHandler<JoinGro
         JoinGroupResponsePacket joinGroupResponsePacket = new JoinGroupResponsePacket();
         joinGroupResponsePacket.setGroupId(groupId);
         joinGroupResponsePacket.setSuccess(true);
-        ctx.channel().writeAndFlush(joinGroupResponsePacket);
+        ctx.writeAndFlush(joinGroupResponsePacket);
     }
 }

@@ -1,4 +1,4 @@
-package message.handler.request;
+package message.handler.service;
 
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandler;
@@ -44,6 +44,6 @@ public class ListGroupMembersRequestHandler extends SimpleChannelInboundHandler<
         ListGroupMembersResponsePacket listGroupMembersResponsePacket = new ListGroupMembersResponsePacket();
         listGroupMembersResponsePacket.setGroupId(groupId);
         listGroupMembersResponsePacket.setSessionList(sessionList);
-        ctx.channel().writeAndFlush(listGroupMembersResponsePacket);
+        ctx.writeAndFlush(listGroupMembersResponsePacket);
     }
 }
